@@ -18,9 +18,9 @@ if __name__ == "__main__":
     
     if not is_production:
         logging.info("Running in development mode with Flask's built-in server")
-        app.run(host="0.0.0.0", port=port, debug=True)
+        app.run(host=host, port=port, debug=True)
     else:
         logging.info("Running in production mode with WSGI server")
         from gevent.pywsgi import WSGIServer
-        http_server = WSGIServer(("0.0.0.0", port), app)
+        http_server = WSGIServer((host, port), app)
         http_server.serve_forever()
